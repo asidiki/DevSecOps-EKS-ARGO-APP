@@ -1,0 +1,34 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: tetrisapp-cluster
+  region: us-east-1
+  version: "1.28"
+
+vpc:
+  subnets:
+    private:
+      us-east-1a: { id: subnet-0732a3c7573e806d6 }
+      us-east-1b: { id: subnet-0215c124970c37076 }
+      us-east-1c: { id: subnet-075cb4e9028f2f11b }
+    public:
+      us-east-1a: { id: subnet-056c0a6628967c9a6 }
+      us-east-1b: { id: subnet-023fb49f2b844d92b }
+      us-east-1c: { id: subnet-04b1617d47f0471ef }
+
+managedNodeGroups:
+  - name: tetrisapp-cluster
+    minSize: 1
+    maxSize: 3
+    desiredCapacity: 1
+    instanceType: t3.medium
+    labels: { role: worker }
+    ssh:
+      publicKeyName: nginxapp
+    tags:
+      nodegroup-role: worker
+    iam:
+      withAddonPolicies:
+        externalDNS: true
+        certManager: true
+        albIngress: true
