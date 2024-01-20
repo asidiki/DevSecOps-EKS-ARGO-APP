@@ -31,7 +31,7 @@ pipeline {
                     // #Give the location of kubernetes scripts directory relative 
                     // #to the repo
                     dir('Kubernetes/k8s-config') {
-                        sh "aws eks update-kubeconfig --name nginxapp-cluster"
+                        sh "aws eks update-kubeconfig --name tetrisapp-cluster"
                         sh "kubectl apply -f deployment.yaml"
                         sh "kubectl apply -f service.yaml"
                     }
