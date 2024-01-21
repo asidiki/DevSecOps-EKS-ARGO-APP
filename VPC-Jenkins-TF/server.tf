@@ -23,6 +23,9 @@ resource "aws_instance" "jenkins-server" {
   tags = {
     Name = "jenkins-server"
   }
+  root_block_device {
+    volume_size = 50
+  }
 }
 
 output "ec2_public_ip" {
