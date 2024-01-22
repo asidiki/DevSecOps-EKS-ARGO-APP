@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: tetris
-          image: asidiki/tetris:latest
+          image: asidiki/tetris:19
           ports:
             - containerPort: 3000
 ---
