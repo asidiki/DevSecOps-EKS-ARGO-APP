@@ -97,7 +97,7 @@ pipeline {
             }
             steps {
                 dir('Manifest-file') {
-                    withCredentials([string(credentialsId: 'git-password', variable: 'GITHUB_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'GITHUB_TOKEN')]) {
                         sh '''
                             git config user.email "ansab@sidiki.io"
                             git config user.name "asidiki"
@@ -106,7 +106,7 @@ pipeline {
                             sudo sed -i "s/tetris/tetris:${BUILD_NUMBER}/" deployment-service.yml
                             git add deployment-service.yml
                             git commit -m "Update deployment Image to version ${BUILD_NUMBER}"
-                            git push https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
+                            git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                         '''
                     }
                 }
